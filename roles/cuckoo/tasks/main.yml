@@ -12,7 +12,6 @@
     - libffi-dev
     - libssl-dev
     - libjpeg-dev
-    - zliblg-dev
     - swig
     - wget
     - mondodb
