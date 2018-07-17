@@ -282,7 +282,7 @@
   become: yes
   become_method: sudo 
   command: sudo mkdir /apps-enabled
-    args:
+  args:
     chdir: /etc/nginx/
   
 - name: Creating nginx symlink
