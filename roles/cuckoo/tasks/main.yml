@@ -274,14 +274,14 @@
 - name: Creating apps-available dir
   become: yes
   become_method: sudo 
-  command: sudo mkdir /apps-avaiable
+  command: sudo mkdir apps-avaiable
   args:
     chdir: /etc/nginx/
     
 - name: Creating apps-enabled dir
   become: yes
   become_method: sudo 
-  command: sudo mkdir /apps-enabled
+  command: sudo mkdir apps-enabled
   args:
     chdir: /etc/nginx/
   
