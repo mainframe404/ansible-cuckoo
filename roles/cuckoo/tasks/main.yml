@@ -159,20 +159,28 @@
 #  become: yes
 #  become_method: sudo
 #  command: rm -rf /tmp/volatility-{{ volatility_version }} && rm -rf /tmp/volatility-{{ volatility_version }}.tar.gz
+
 - name: Run stuff/monitor.py
   become: yes
   become_method: sudo
-  command: sudo python /home/cukcoo/cuckoo-2.0.6/suff/monitor.py
+  command: python stuff/monitor.py 
+  args:
+    chdir: /home/cuckoo/cuckoo-{{ cuckoo_version }}/
 
 - name: Run Setup.py 
   become: yes
   become_method: sudo
-  command: sudo python /home/cukcoo/cuckoo-2.0.6/setup.py
+  command: python setup.py delvelop 
+  args:
+    chdir: /home/cuckoo/cuckoo-{{ cuckoo_version }}/
   
 - name: Run Setup.py sdist
   become: yes
   become_method: sudo
-  command: sudo python /home/cukcoo/cuckoo-2.0.6/setup.py sdist
+   command: python setup.py sdist 
+  args:
+    chdir: /home/cuckoo/cuckoo-{{ cuckoo_version }}/
+  
 - name: Give proper permissions
   become: yes
   become_method: sudo
