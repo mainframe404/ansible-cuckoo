@@ -188,7 +188,7 @@
   args:
     chdir: /home/cuckoo/cuckoo-{{ cuckoo_version }}/
  
-  #will have to change the path of files before you run
+  #will have to change the path of files before you run or change cuckoo CWD
 - name: Give proper permissions
   become: yes
   become_method: sudo
@@ -290,7 +290,16 @@
   become_method: sudo
   command: sudo ln -s /etc/nginx/sites-available/cuckoo-web /etc/nginx/sites-enabled/
   
- 
+- name: Move Cuckoo web file to nginx
+  become: yes
+  become_method: sudo
+  template: src=cuckoo_web.conf.j2 dest=/etc/nginx/apps-available/cuckoo-web.conf owner=root group=root mode=0644
+  
+- name: Move Cuckoo API file to nginx
+  become: yes
+  become_method: sudo
+  template: src=nginx.cuckoo-api.conf.j2 dest=/etc/nginx/apps-available/cuckoo-api.conf owner=root group=root mode=0644
+  
 - name: Install Cuckoo Sandbox Web Service
   become: yes
   become_method: sudo
