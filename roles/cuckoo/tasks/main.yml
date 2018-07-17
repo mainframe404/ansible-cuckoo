@@ -170,7 +170,7 @@
 - name: Run Setup.py 
   become: yes
   become_method: sudo
-  command: python setup.py delvelop 
+  command: python setup.py develop 
   args:
     chdir: /home/cuckoo/cuckoo-{{ cuckoo_version }}/
   
