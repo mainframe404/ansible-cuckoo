@@ -180,36 +180,44 @@
   command: python setup.py sdist 
   args:
     chdir: /home/cuckoo/cuckoo-{{ cuckoo_version }}/
+    
+- name: Run cuckoo -d
+  decome: yes
+  become_method: sudo 
+  command: cuckoo -d
+  args:
+    chdir: /home/cuckoo/cuckoo-{{ cuckoo-version }}/
+ 
   
 - name: Give proper permissions
   become: yes
   become_method: sudo
-  file: path="/home/cuckoo/cuckoo-{{ cuckoo_version }}" state=directory recurse=yes owner=cuckoo group=cuckoo
+  file: path="/home/test/.cuckoo" state=directory recurse=yes owner=cuckoo group=cuckoo
 
 - name: Update cuckoo.conf
   become: yes
   become_method: sudo
-  template: src=cuckoo.conf.j2 dest=/home/cuckoo/cuckoo-{{ cuckoo_version }}/conf/cuckoo.conf owner=cuckoo group=cuckoo mode=0644
+  template: src=cuckoo.conf.j2 dest=/home/test/.cuckoo/conf/cuckoo.conf owner=cuckoo group=cuckoo mode=0644
 
 - name: Update memory.conf
   become: yes
   become_method: sudo
-  template: src=memory.conf.j2 dest=/home/cuckoo/cuckoo-{{ cuckoo_version }}/conf/memory.conf owner=cuckoo group=cuckoo mode=0644
+  template: src=memory.conf.j2 dest=/home/test/.cuckoo/conf/memory.conf owner=cuckoo group=cuckoo mode=0644
 
 - name: Update processing.conf
   become: yes
   become_method: sudo
-  template: src=processing.conf.j2 dest=/home/cuckoo/cuckoo-{{ cuckoo_version }}/conf/processing.conf owner=cuckoo group=cuckoo mode=0644
+  template: src=processing.conf.j2 dest=/home/test/.cuckoo/conf/processing.conf owner=cuckoo group=cuckoo mode=0644
 
 - name: Update reporting.conf
   become: yes
   become_method: sudo
-  template: src=reporting.conf.j2 dest=/home/cuckoo/cuckoo-{{ cuckoo_version }}/conf/reporting.conf owner=cuckoo group=cuckoo mode=0644
+  template: src=reporting.conf.j2 dest=/home/test/.cuckoo/conf/reporting.conf owner=cuckoo group=cuckoo mode=0644
 
 - name: Update virtualbox.conf
   become: yes
   become_method: sudo
-  template: src=virtualbox.conf.j2 dest=/home/cuckoo/cuckoo-{{ cuckoo_version }}/conf/virtualbox.conf owner=cuckoo group=cuckoo mode=0644
+  template: src=virtualbox.conf.j2 dest=/home/test/.cuckoo/conf/virtualbox.conf owner=cuckoo group=cuckoo mode=0644
 
 #kvm support (move to kvm role and run prior to cuckoo role)
 #apt-get install -y qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils python-libvirt
