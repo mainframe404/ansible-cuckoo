@@ -266,7 +266,7 @@
   become_method: sudo
   template: src=cuckoo-api.ini.j2 dest=/etc/uwsgi/apps-available/cuckoo-api.ini owner=root group=root mode=0644
   
- - name: Creating uwsig symlink
+- name: Creating uwsig symlink
   become: yes
   become_method: sudo
   command: sudo ln -s /etc/uwsgi/apps-available/cuckoo-web.ini /etc/uwsgi/apps-enabled/
@@ -278,7 +278,7 @@
   args:
     chdir: /etc/nginx/
     
-  - name: Creating apps-enabled dir
+- name: Creating apps-enabled dir
   become: yes
   become_method: sudo 
   command: sudo mkdir /apps-enabled
