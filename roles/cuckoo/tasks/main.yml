@@ -14,7 +14,7 @@
     - libjpeg-dev
     - swig
     - wget
-    - mondodb
+    - mongodb
     - build-essential
     - tcpdump
     
@@ -72,14 +72,16 @@
   become_method: sudo
   apt: name={{ item }} state=present
   with_items:
-    - libprcre3
-    - libprcre3-dev
-    - libtool
-    - automake
-    - autoconf
-    - libssl-dev
-    - libmagic-dev
-    - build-essential
+  - libpcre3
+  - libpcre3-dev
+  - libtool
+  - automake
+  - autoconf
+  - python-dev
+  - libssl-dev
+  - libjansson-dev
+  - libmagic-dev
+  - build-essential
   
 
 - name: Download yara
