@@ -186,7 +186,7 @@
   become_method: sudo 
   command: cuckoo -d
   args:
-    chdir: /home/cuckoo/cuckoo-{{ cuckoo-version }}/
+    chdir: /home/cuckoo/cuckoo-{{ cuckoo_version }}/
  
   
 - name: Give proper permissions
