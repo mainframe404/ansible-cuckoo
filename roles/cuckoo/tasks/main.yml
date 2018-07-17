@@ -160,6 +160,16 @@
 #  become_method: sudo
 #  command: rm -rf /tmp/volatility-{{ volatility_version }} && rm -rf /tmp/volatility-{{ volatility_version }}.tar.gz
 
+- name: Run Setup.py 
+  become: yes
+  become_method: sudo
+  command: sudo python /home/cukcoo/cuckoo-2.0.6/setup.py sdist
+  
+- name: Run Setup.py 
+  become: yes
+  become_method: sudo
+  command: sudo python /home/cukcoo/cuckoo-2.0.6/setup.py 
+
 - name: Give proper permissions
   become: yes
   become_method: sudo
