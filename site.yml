@@ -5,7 +5,7 @@
   # remote_user: user
   # sudo: yes
   vars:
-    - cuckoo_version: "2.0-rc1"
+    - cuckoo_version: "2.0.6"
 
   roles:
     - virtualbox
