@@ -3,8 +3,17 @@
 - name: Install requirements from apt
   become: yes
   become_method: sudo
-  apt: pkg={{ item }} state=latest
-  with_items: apt_requirements
+  apt: name={{ item }} state=present
+  with_items: 
+    - python
+    - python-pip
+    - libffi-dev
+    - libssl-dev
+    - libjpeg-dev
+    - wget
+    - mondodb
+    - build-essential
+    
 
 - name: Create cuckoo group
   become: yes
@@ -34,8 +43,16 @@
 - name: Install requirements from pip
   become: yes
   become_method: sudo
-  pip: requirements=/home/cuckoo/cuckoo-{{ cuckoo_version }}/requirements.txt
-
+  pip: name={{ item }} state=present
+  with_items:
+    - django-ratelimit
+    - dnspython
+    - bottle
+    - pygal
+    - vmcloak
+    - distorm3
+    - gunicorn
+    
 #- name: Install additional python modules
 #  pip: name={{ item }} state=present
 #  with_items: pip_requirements
@@ -50,8 +67,17 @@
 - name: Install yara requirements from apt
   become: yes
   become_method: sudo
-  apt: pkg={{ item }} state=latest
-  with_items: yara_apt_requirements
+  apt: name={{ item }} state=present
+  with_items:
+    - libprcre3
+    - libprcre3-dev
+    - libtool
+    - automake
+    - autoconf
+    - libssl-dev
+    - libmagic-dev
+    - build-essential
+  
 
 - name: Download yara
   become: yes
