@@ -51,7 +51,6 @@
     - pygal
     - vmcloak
     - distorm3
-    - gunicorn
     
 #- name: Install additional python modules
 #  pip: name={{ item }} state=present
