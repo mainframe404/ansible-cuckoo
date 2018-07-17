@@ -1,5 +1,5 @@
 ---
-cuckoo_version: "2.0-rc1"
+cuckoo_version: "2.0.6"
 apt_requirements:
   - python
   - python-pip
