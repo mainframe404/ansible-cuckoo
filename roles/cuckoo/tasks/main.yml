@@ -7,12 +7,17 @@
   with_items: 
     - python
     - python-pip
+    - python-virtualenv
+    - python-setuptools
     - libffi-dev
     - libssl-dev
     - libjpeg-dev
+    - zliblg-dev
+    - swig
     - wget
     - mondodb
     - build-essential
+    - tcpdump
     
 
 - name: Create cuckoo group
