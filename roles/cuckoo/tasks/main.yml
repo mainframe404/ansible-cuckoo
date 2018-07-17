@@ -188,7 +188,7 @@
   args:
     chdir: /home/cuckoo/cuckoo-{{ cuckoo_version }}/
  
-  
+  #will have to change the path of files before you run
 - name: Give proper permissions
   become: yes
   become_method: sudo
@@ -265,9 +265,32 @@
   become: yes
   become_method: sudo
   template: src=cuckoo-api.ini.j2 dest=/etc/uwsgi/apps-available/cuckoo-api.ini owner=root group=root mode=0644
-
-# create symlink between /etc/uwsgi/apps-available/cuckoo-api.ini and /etc/uwsgi/apps-enabled/cuckoo-api.ini
-
+  
+ - name: Creating uwsig symlink
+  become: yes
+  become_method: sudo
+  command: sudo ln -s /etc/uwsgi/apps-available/cuckoo-web.ini /etc/uwsgi/apps-enabled/
+  
+- name: Creating apps-available dir
+  become: yes
+  become_method: sudo 
+  command: sudo mkdir /apps-avaiable
+  args:
+    chdir: /etc/nginx/
+    
+  - name: Creating apps-enabled dir
+  become: yes
+  become_method: sudo 
+  command: sudo mkdir /apps-enabled
+    args:
+    chdir: /etc/nginx/
+  
+- name: Creating nginx symlink
+  become: yes
+  become_method: sudo
+  command: sudo ln -s /etc/nginx/sites-available/cuckoo-web /etc/nginx/sites-enabled/
+  
+ 
 - name: Install Cuckoo Sandbox Web Service
   become: yes
   become_method: sudo
@@ -289,19 +312,19 @@
   template: src=nginx.cuckoo-web.conf.j2 dest=/etc/nginx/conf.d/cuckoo-web.conf owner=root group=root mode=0644
   notify: restart nginx
 
-- name: Enable Cuckoo Sandbox service
-  become: yes
-  become_method: sudo
-  service: name=cuckoo enabled=yes state=restarted
+#- name: Enable Cuckoo Sandbox service
+#  become: yes
+#  become_method: sudo
+#  service: name=cuckoo enabled=yes state=restarted
 
-- name: Enable Cuckoo-Web Sandbox service
-  become: yes
-  become_method: sudo
-  service: name=cuckoo-web enabled=yes state=restarted
+#- name: Enable Cuckoo-Web Sandbox service
+#  become: yes
+#  become_method: sudo
+# service: name=cuckoo-web enabled=yes state=restarted
 
 # start/enable cuckoo-api?
 
-- name: Enable Nginx service
-  become: yes
-  become_method: sudo
-  service: name=nginx enabled=yes state=restarted
+#- name: Enable Nginx service
+#  become: yes
+#  become_method: sudo
+#  service: name=nginx enabled=yes state=restarted
