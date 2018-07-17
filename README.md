@@ -5,13 +5,13 @@ Ansible Playbook for installing and configuring [Cuckoo Sandbox](http://www.cuck
 
 **This is not production code yet.**
 
-This playbook was inspired by [ezetze's ansible-cuckoo](https://github.com/ezeteze/ansible-cuckoo) with changes to support Cuckoo Sandbox 2.0.
+This playbook was inspired by [ezetze's ansible-cuckoo](https://github.com/ezeteze/ansible-cuckoo) with changes to support Cuckoo Sandbox 2.0.6
 
-The playbook is tested on **Ubuntu 14.04 x64**.  **CentOS 7 w/ SELinux Enforcing** support coming soon.
+The playbook is tested on **Ubuntu 14.04 x64**.  
 
 Currently uses Ansible playbook structure with two distinct roles:
 
--	**Cuckoo**: This role downloads cuckoo version 2.0-rc1 from official github repository and installs required dependencies. 
+-	**Cuckoo**: This role downloads cuckoo version 2.0.6 from official github repository and installs required dependencies. 
 -	**Virtualbox**: This role adds the official virtualbox ppa repository for Ubuntu and installs virtualbox.
 
 Additional roles being developed:
@@ -24,7 +24,7 @@ To install cuckoo on a local Ubuntu 14.04 LTS virtual machine clone this repo an
 
     sudo apt-add-repository ppa:ansible/ansible && apt-get update
     sudo apt-get –y install git ansible 
-    git clone https://github.com/breachintelligence/ansible-cuckoo
+    git clone https://github.com/mainframe7/ansible-cuckoo
     cd ansible-cuckoo
     sudo ansible-playbook -i hosts site.yml --connection=local
 
