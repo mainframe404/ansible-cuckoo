@@ -1,4 +1,5 @@
 ---
+#if you dont need virualbox installed comment out what you don't want and then remove the something or other
 - name: Configure the Oracle APT key
   become: yes
   become_method: sudo
@@ -14,6 +15,7 @@
   become_method: sudo
   apt: pkg=virtualbox-{{ virtualbox_version }} state=present update_cache=yes
  
+ # not sure why these aren't working. 
 #- name: Download Virtualbox extpack
 #  become: yes
 #  become_method: sudo
