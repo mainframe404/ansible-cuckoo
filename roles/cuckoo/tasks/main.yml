@@ -168,8 +168,10 @@
 - name: Move Suricata-cuckoo file to correct location
   become: yes
   become_method: sudo
-  #template: src=suricata-cuckoo.yaml.j2 dest=/etc/suricata/suricata-cuckoo.yaml owner=root group=root mode=0644
+  #template: src=suricata-cuckoo.conf.j2 dest=/etc/suricata/suricata-cuckoo.yaml owner=root group=root mode=0644
   command: cp roles/cuckoo/templates/suricata-cuckoo.conf.j2 /etc/suricata-cuckoo.yaml
+  args:
+    chdir: /home/test/ansible-cuckoo/
   
 #- name: Cleanup volatility installation files
 #  become: yes
