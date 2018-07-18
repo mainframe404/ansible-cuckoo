@@ -4,6 +4,8 @@ upstream _uwsgi_cuckoo_web {
 
 server {
     listen *:443 ssl http2;
+    #need to put a server name here
+   # server_name ; 
     ssl_certificate /etc/nginx/ssl/cuckoo.crt;
     ssl_certificate_key /etc/nginx/ssl/cuckoo.key;
     ssl_dhparam /etc/nginx/ssl/dhparam.pem;
@@ -40,7 +42,7 @@ server {
              proxy_set_header Connection $http_connection;
 
                      }
-                     
+        #need to change all these paths
            location /home/cuckoo/.cuckoo/storage/ {
  #          alias /opt/cuckoo/storage/analyses/;
             autoindex on;
@@ -51,6 +53,7 @@ server {
 
 server {
     listen *:80;
+    #need to put server name here
     server_name ;
     return 301 https://$server_name$request_uri;
   #  proxy_buffering off;
