@@ -66,10 +66,12 @@
 #  with_items: pip_requirements
 #  become: yes
 #  become_method: sudo
-- name: tcpdump aa-disable 
-  become: yes
-  become_method: sudo
-  command: aa-disable /usr/sbin/tcpdump
+
+# not sure what is wrong with this
+#- name: tcpdump aa-disable 
+#  become: yes
+#  become_method: sudo
+#  command: aa-disable /usr/sbin/tcpdump
   
 - name: Setcap tcptump permissions
   become: yes
@@ -166,7 +168,8 @@
 - name: Move Suricata-cuckoo file to correct location
   become: yes
   become_method: sudo
-  template: src=suricata-cuckoo.yaml.j2 dest=/etc/suricata/suricata-cuckoo.yaml owner=root group=root mode=0644
+  #template: src=suricata-cuckoo.yaml.j2 dest=/etc/suricata/suricata-cuckoo.yaml owner=root group=root mode=0644
+  command: cp roles/cuckoo/templates/suricata-cuckoo.conf.j2 /etc/suricata-cuckoo.yaml
   
 #- name: Cleanup volatility installation files
 #  become: yes
