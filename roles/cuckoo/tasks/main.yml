@@ -269,7 +269,7 @@
 - name: Creating uwsig symlink
   become: yes
   become_method: sudo
-  command: sudo ln -s /etc/uwsgi/apps-available/cuckoo-web.ini /etc/uwsgi/sites-enabled/
+  command: sudo ln -s /etc/uwsgi/apps-available/cuckoo-web.ini /etc/uwsgi/apps-enabled/
   
 - name: Creating apps-available dir
   become: yes
