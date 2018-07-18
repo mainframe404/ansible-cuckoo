@@ -20,6 +20,7 @@
     - apparmor-utils
     - ssdeep
     - suricata
+    - swig
     
 
 - name: Create cuckoo group
