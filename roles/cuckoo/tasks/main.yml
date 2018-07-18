@@ -18,6 +18,7 @@
     - build-essential
     - tcpdump
     - ssdeep
+    - suricata
     
 
 - name: Create cuckoo group
@@ -156,7 +157,12 @@
   command: python setup.py install
   args:
     chdir: /tmp/volatility-{{ volatility_version }}
-
+    
+- name: Move Suricata-cuckoo file to correct location
+  become: yes
+  become_method: sudo
+  template: src=suricata-cuckoo.yaml.j2 dest=/etc/suricata/suricata-cuckoo.yaml owner=root group=root mode=0644
+  
 #- name: Cleanup volatility installation files
 #  become: yes
 #  become_method: sudo
