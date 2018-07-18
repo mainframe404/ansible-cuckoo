@@ -17,6 +17,7 @@
     - mongodb
     - build-essential
     - tcpdump
+    - apparmor-utils
     - ssdeep
     - suricata
     
@@ -65,7 +66,11 @@
 #  with_items: pip_requirements
 #  become: yes
 #  become_method: sudo
-
+- name: tcpdump aa-disable 
+  become: yes
+  become_method: sudo
+  command: aa-disable /usr/sbin/tcpdump
+  
 - name: Setcap tcptump permissions
   become: yes
   become_method: sudo
