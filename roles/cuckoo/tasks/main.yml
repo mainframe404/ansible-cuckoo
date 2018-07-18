@@ -271,14 +271,14 @@
   become_method: sudo
   command: sudo ln -s /etc/uwsgi/apps-available/cuckoo-web.ini /etc/uwsgi/apps-enabled/
   
-- name: Creating apps-available dir
+- name: Creating sites-available dir
   become: yes
   become_method: sudo 
-  command: sudo mkdir sites-avaiable
+  command: sudo mkdir sites-available
   args:
     chdir: /etc/nginx/
     
-- name: Creating apps-enabled dir
+- name: Creating sites-enabled dir
   become: yes
   become_method: sudo 
   command: sudo mkdir sites-enabled
