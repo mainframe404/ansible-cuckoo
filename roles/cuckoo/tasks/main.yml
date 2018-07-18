@@ -269,19 +269,19 @@
 - name: Creating uwsig symlink
   become: yes
   become_method: sudo
-  command: sudo ln -s /etc/uwsgi/apps-available/cuckoo-web.ini /etc/uwsgi/apps-enabled/
+  command: sudo ln -s /etc/uwsgi/apps-available/cuckoo-web.ini /etc/uwsgi/sites-enabled/
   
 - name: Creating apps-available dir
   become: yes
   become_method: sudo 
-  command: sudo mkdir apps-avaiable
+  command: sudo mkdir sites-avaiable
   args:
     chdir: /etc/nginx/
     
 - name: Creating apps-enabled dir
   become: yes
   become_method: sudo 
-  command: sudo mkdir apps-enabled
+  command: sudo mkdir sites-enabled
   args:
     chdir: /etc/nginx/
   
@@ -293,12 +293,12 @@
 - name: Move Cuckoo web file to nginx
   become: yes
   become_method: sudo
-  template: src=cuckoo_web.conf.j2 dest=/etc/nginx/apps-available/cuckoo-web.conf owner=root group=root mode=0644
+  template: src=cuckoo_web.conf.j2 dest=/etc/nginx/sites-available/cuckoo-web.conf owner=root group=root mode=0644
   
 - name: Move Cuckoo API file to nginx
   become: yes
   become_method: sudo
-  template: src=nginx.cuckoo-api.conf.j2 dest=/etc/nginx/apps-available/cuckoo-api.conf owner=root group=root mode=0644
+  template: src=nginx.cuckoo-api.conf.j2 dest=/etc/nginx/sites-available/cuckoo-api.conf owner=root group=root mode=0644
   
 - name: Install Cuckoo Sandbox Web Service
   become: yes
