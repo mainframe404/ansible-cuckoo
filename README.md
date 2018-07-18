@@ -13,10 +13,10 @@ Currently uses Ansible playbook structure with two distinct roles:
 
 -	**Cuckoo**: This role downloads cuckoo version 2.0.6 from official github repository and installs required dependencies. 
     **Includes following features**
-        Yara
-        Ssdeep
-        Suricata
-        Volatillity
+        -Yara
+        -Ssdeep
+       -Suricata
+        -Volatillity
         
 -	**Virtualbox**: This role adds the official virtualbox ppa repository for Ubuntu and installs virtualbox.
 
