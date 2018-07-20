@@ -199,14 +199,14 @@
   become: yes
   become_method: sudo
   command: make
-   args:
+  args:
     chdir: /home/test/ssdeep-2.13
     
 - name: Install ssdeep 
   become: yes
   become_method: sudo
   command: make install
-   args:
+  args:
     chdir: /home/test/ssdeep-2.13
     
 #- name: Cleanup volatility installation files
