@@ -169,9 +169,14 @@
   become: yes
   become_method: sudo
   #template: src=suricata-cuckoo.conf.j2 dest=/etc/suricata/suricata-cuckoo.yaml owner=root group=root mode=0644
-  command: cp roles/cuckoo/templates/suricata-cuckoo.conf.j2 /etc/suricata-cuckoo.yaml
-  args:
-    chdir: /home/test/ansible-cuckoo/
+  #command: cp roles/cuckoo/templates/suricata-cuckoo.conf.j2 /etc/suricata-cuckoo.yaml
+  copy: 
+    src: /home/test/ansible-cuckoo/roles/cuckoo/templates/suricata-cuckoo.conf.j2
+    dest: /etc/suricata-cuckoo.yaml
+    owner: root
+    mode: 0644
+  #args:
+  #  chdir: /home/test/ansible-cuckoo/
   
 #- name: Cleanup volatility installation files
 #  become: yes
