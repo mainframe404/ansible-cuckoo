@@ -168,16 +168,47 @@
 - name: Move Suricata-cuckoo file to correct location
   become: yes
   become_method: sudo
-  #template: src=suricata-cuckoo.conf.j2 dest=/etc/suricata/suricata-cuckoo.yaml owner=root group=root mode=0644
-  #command: cp roles/cuckoo/templates/suricata-cuckoo.conf.j2 /etc/suricata-cuckoo.yaml
   copy: 
     src: /home/test/ansible-cuckoo/roles/cuckoo/templates/suricata-cuckoo.conf.j2
-    dest: /etc/suricata-cuckoo.yaml
+    dest: /etc/suricata/suricata-cuckoo.yaml
     owner: root
     mode: 0644
-  #args:
-  #  chdir: /home/test/ansible-cuckoo/
-  
+    
+- name: Getting ssdeep-2.13
+  become: yes
+  become_method: sudo 
+  command: wget http://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz/download -O ssdeep-2.13.tar.gz
+  args:
+    chdir: /home/test
+
+- name: untaring ssdeep
+  become: yes
+  become_method: sudo 
+  command: tar -zxf ssdeep-2.13.tar.gz
+  args:
+    chdir: /home/test
+
+- name: Configure ssdeep
+  become: yes
+  become_method: sudo
+  command: ./configure
+  args:
+    chdir: /home/test/ssdeep-2.13
+
+- name: Make ssdeep
+  become: yes
+  become_method: sudo
+  command: make
+   args:
+    chdir: /home/test/ssdeep-2.13
+    
+- name: Install ssdeep 
+  become: yes
+  become_method: sudo
+  command: make install
+   args:
+    chdir: /home/test/ssdeep-2.13
+    
 #- name: Cleanup volatility installation files
 #  become: yes
 #  become_method: sudo
