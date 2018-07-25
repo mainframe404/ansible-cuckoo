@@ -30,7 +30,7 @@ To install cuckoo on a local Ubuntu 14.04 LTS virtual machine clone this repo an
 
     sudo apt-add-repository ppa:ansible/ansible && apt-get update
     sudo apt-get –y install git ansible 
-    git clone https://github.com/mainframe7/ansible-cuckoo
+    git clone https://github.com/mainframe404/ansible-cuckoo
     cd ansible-cuckoo
     sudo ansible-playbook -i hosts site.yml --connection=local
 
