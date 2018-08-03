@@ -6,6 +6,7 @@
   # sudo: yes
   vars:
     - cuckoo_version: "2.0.6"
+    - install_dir: "/home/cuckoo/"
 
   roles:
     - virtualbox
