@@ -169,7 +169,7 @@
   become: yes
   become_method: sudo
   copy: 
-    src: /home/test/ansible-cuckoo/roles/cuckoo/templates/suricata-cuckoo.conf.j2
+    src: /home/{{ install_dir }}/ansible-cuckoo/roles/cuckoo/templates/suricata-cuckoo.conf.j2
     dest: /etc/suricata/suricata-cuckoo.yaml
     owner: root
     mode: 0644
@@ -179,35 +179,35 @@
   become_method: sudo 
   command: wget http://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz/download -O ssdeep-2.13.tar.gz
   args:
-    chdir: /home/test
+    chdir: /home/{{ install_dir }}
 
 - name: untaring ssdeep
   become: yes
   become_method: sudo 
   command: tar -zxf ssdeep-2.13.tar.gz
   args:
-    chdir: /home/test
+    chdir: /home/{{ install_dir }}
 
 - name: Configure ssdeep
   become: yes
   become_method: sudo
   command: ./configure
   args:
-    chdir: /home/test/ssdeep-2.13
+    chdir: /home/{{ install_dir }}/ssdeep-2.13
 
 - name: Make ssdeep
   become: yes
   become_method: sudo
   command: make
   args:
-    chdir: /home/test/ssdeep-2.13
+    chdir: /home/{{ install_dir }}/ssdeep-2.13
     
 - name: Install ssdeep 
   become: yes
   become_method: sudo
   command: make install
   args:
-    chdir: /home/test/ssdeep-2.13
+    chdir: /home/{{ install_dir }}/ssdeep-2.13
     
 #- name: Cleanup volatility installation files
 #  become: yes
@@ -219,59 +219,59 @@
   become_method: sudo
   command: python stuff/monitor.py 
   args:
-    chdir: /home/cuckoo/cuckoo-{{ cuckoo_version }}/
+    chdir: /home/{{ install_dir }}/cuckoo-{{ cuckoo_version }}/
 
 - name: Run Setup.py develop
   become: yes
   become_method: sudo
   command: python setup.py develop 
   args:
-    chdir: /home/cuckoo/cuckoo-{{ cuckoo_version }}/
+    chdir: /home/{{ install_dir }}/cuckoo-{{ cuckoo_version }}/
   
 - name: Run Setup.py sdist
   become: yes
   become_method: sudo
   command: python setup.py sdist 
   args:
-    chdir: /home/cuckoo/cuckoo-{{ cuckoo_version }}/
+    chdir: /home/{{ install_dir }}/cuckoo-{{ cuckoo_version }}/
     
 - name: Run cuckoo -d
   decome: yes
   become_method: sudo 
   command: cuckoo -d
   args:
-    chdir: /home/cuckoo/cuckoo-{{ cuckoo_version }}/
+    chdir: /home/{{ install_dir }}/cuckoo-{{ cuckoo_version }}/
  
   #will have to change the path of files before you run or change cuckoo CWD
 - name: Give proper permissions
   become: yes
   become_method: sudo
-  file: path="/home/test/.cuckoo" state=directory recurse=yes owner=cuckoo group=cuckoo
+  file: path="/home/{{ install_dir }}/.cuckoo" state=directory recurse=yes owner=cuckoo group=cuckoo
 
 - name: Update cuckoo.conf
   become: yes
   become_method: sudo
-  template: src=cuckoo.conf.j2 dest=/home/test/.cuckoo/conf/cuckoo.conf owner=cuckoo group=cuckoo mode=0644
+  template: src=cuckoo.conf.j2 dest=/home/{{ install_dir }}/.cuckoo/conf/cuckoo.conf owner=cuckoo group=cuckoo mode=0644
 
 - name: Update memory.conf
   become: yes
   become_method: sudo
-  template: src=memory.conf.j2 dest=/home/test/.cuckoo/conf/memory.conf owner=cuckoo group=cuckoo mode=0644
+  template: src=memory.conf.j2 dest=/home/{{ install_dir }}/.cuckoo/conf/memory.conf owner=cuckoo group=cuckoo mode=0644
 
 - name: Update processing.conf
   become: yes
   become_method: sudo
-  template: src=processing.conf.j2 dest=/home/test/.cuckoo/conf/processing.conf owner=cuckoo group=cuckoo mode=0644
+  template: src=processing.conf.j2 dest=/home/{{ install_dir }}/.cuckoo/conf/processing.conf owner=cuckoo group=cuckoo mode=0644
 
 - name: Update reporting.conf
   become: yes
   become_method: sudo
-  template: src=reporting.conf.j2 dest=/home/test/.cuckoo/conf/reporting.conf owner=cuckoo group=cuckoo mode=0644
+  template: src=reporting.conf.j2 dest=/home/{{ install_dir }}/.cuckoo/conf/reporting.conf owner=cuckoo group=cuckoo mode=0644
 
 - name: Update virtualbox.conf
   become: yes
   become_method: sudo
-  template: src=virtualbox.conf.j2 dest=/home/test/.cuckoo/conf/virtualbox.conf owner=cuckoo group=cuckoo mode=0644
+  template: src=virtualbox.conf.j2 dest=/home/{{ install_dir }}/.cuckoo/conf/virtualbox.conf owner=cuckoo group=cuckoo mode=0644
 
 #kvm support (move to kvm role and run prior to cuckoo role)
 #apt-get install -y qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils python-libvirt
